@@ -1,0 +1,102 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --radius-sm: calc(var(--radius) - 3px);
+  --radius-md: calc(var(--radius) - 1px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-sky: var(--sky);
+  --color-mist: var(--mist);
+  --color-gold: var(--gold);
+  --color-leaf: var(--leaf);
+  --color-lagoon: var(--lagoon);
+  --color-surface-dark: var(--surface-dark);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-float: var(--shadow-float);
+}
+
+:root {
+  --radius: 0.35rem;
+  --background: oklch(0.985 0.006 100);
+  --foreground: oklch(0.22 0.025 160);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.025 160);
+  --primary: oklch(0.56 0.17 240);
+  --primary-foreground: oklch(0.99 0.005 100);
+  --secondary: oklch(0.94 0.045 215);
+  --secondary-foreground: oklch(0.3 0.08 245);
+  --muted: oklch(0.95 0.012 100);
+  --muted-foreground: oklch(0.48 0.025 160);
+  --accent: oklch(0.68 0.17 140);
+  --accent-foreground: oklch(0.99 0.005 100);
+  --border: oklch(0.88 0.018 135);
+  --input: oklch(0.9 0.015 135);
+  --ring: oklch(0.56 0.17 240);
+  --forest: oklch(0.5 0.12 235);
+  --forest-deep: oklch(0.23 0.07 245);
+  --sky: oklch(0.7 0.15 210);
+  --mist: oklch(0.97 0.025 215);
+  --gold: oklch(0.73 0.12 85);
+  --leaf: oklch(0.55 0.14 148);
+  --lagoon: oklch(0.62 0.13 205);
+  --surface-dark: oklch(0.2 0.065 245);
+  --shadow-soft: 0 20px 60px -28px color-mix(in oklab, var(--forest-deep) 28%, transparent);
+  --shadow-float: 0 30px 80px -28px color-mix(in oklab, var(--forest-deep) 45%, transparent);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+  ::selection { background: color-mix(in oklab, var(--forest) 25%, transparent); }
+}
+
+@utility text-balance { text-wrap: balance; }
+@utility preserve-3d { transform-style: preserve-3d; }
+@utility perspective-scene { perspective: 1200px; }
+@utility grid-lines {
+  background-image: linear-gradient(color-mix(in oklab, var(--forest) 7%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--forest) 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+@utility brand-wash {
+  background-image: linear-gradient(135deg, color-mix(in oklab, var(--lagoon) 14%, var(--background)), color-mix(in oklab, var(--leaf) 10%, var(--background)) 52%, color-mix(in oklab, var(--gold) 12%, var(--background)));
+}
+@utility brand-stripe {
+  background-image: linear-gradient(90deg, var(--primary) 0 38%, var(--leaf) 38% 72%, var(--gold) 72% 100%);
+}
+
+@keyframes drift { 0%,100% { transform: translate3d(0,0,0) rotate(-2deg); } 50% { transform: translate3d(0,-16px,30px) rotate(1deg); } }
+@keyframes reveal { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.animate-drift { animation: drift 7s ease-in-out infinite; }
+.animate-reveal { animation: reveal .8s ease-out both; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-drift, .animate-reveal, .animate-marquee { animation: none; }
+}
